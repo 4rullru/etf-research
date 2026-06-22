@@ -4,15 +4,18 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
   // GitHub Pages 기본 도메인
   site: 'https://4rullru.github.io',
-  
+
   // ⚠️ 확정하신 레포지토리 이름으로 경로 설정 (매우 중요)
   base: '/etf-research',
 
   integrations: [mdx(), sitemap()],
+
   fonts: [
     {
       provider: fontProviders.local(),
@@ -37,4 +40,8 @@ export default defineConfig({
       },
     },
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
