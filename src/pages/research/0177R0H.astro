@@ -1,0 +1,529 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="TIGER 반도체TOP10커버드콜액티브 ETF 분석">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css">
+<style>
+:root {
+  --primary: #2563EB;
+  --primary-light: #EFF6FF;
+  --success: #059669;
+  --success-light: #ECFDF5;
+  --danger: #DC2626;
+  --danger-light: #FEF2F2;
+  --warning: #D97706;
+  --warning-light: #FFFBEB;
+  --text-main: #111827;
+  --text-muted: #4B5563;
+  --bg-body: #F9FAFB;
+  --bg-card: #FFFFFF;
+  --border: #E5E7EB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+	font-family: 'NanumSquare','Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.blog {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  color: white;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+}
+.hero-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+.hero-title {
+  color : white;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  word-break: keep-all;
+}
+.hero-sub {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  word-break: keep-all;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.stat {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.stat-label {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+.stat-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: #FCD34D;
+}
+.stat-val.normal { color: white; }
+
+/* Sections & Cards */
+.section { margin-bottom: 3.5rem; }
+.section-label {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  word-break: keep-all;
+}
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border);
+}
+.prose {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+/* Highlight Box */
+.highlight-box {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin-top: 1.5rem;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Steps */
+.steps { display: flex; flex-direction: column; }
+.step {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; padding-bottom: 0; }
+.step:first-child { padding-top: 0; }
+.step-num {
+  width: 34px; height: 34px;
+  background: var(--primary); color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px; flex-shrink: 0;
+}
+.step-title { font-weight: 700; font-size: 17px; margin-bottom: 6px; color: var(--text-main); }
+.step-desc { font-size: 15px; color: var(--text-muted); word-break: keep-all; }
+
+/* Charts */
+.chart-wrap { position: relative; width: 100%; margin-top: 1rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 16px; font-size: 13px; color: var(--text-muted); justify-content: center; }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.legend-sq { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+/* Grid & Compare */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+.compare-card { background: var(--bg-card); border-radius: 16px; padding: 1.75rem; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: relative; }
+.compare-card.featured { border: 2px solid var(--primary); }
+.compare-badge { position: absolute; top: -14px; right: 20px; background: var(--primary); color: white; font-size: 12px; padding: 6px 14px; border-radius: 20px; font-weight: 700; box-shadow: 0 2px 4px rgba(37,99,235,0.2); }
+.compare-name { font-size: 18px; font-weight: 700; margin-bottom: 1.5rem; text-align: center; color: var(--text-main); line-height: 1.3; }
+.compare-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14.5px; }
+.compare-row:last-child { border-bottom: none; padding-bottom: 0; }
+.compare-key { color: var(--text-muted); }
+.compare-val { font-weight: 600; color: var(--text-main); }
+.compare-val.good { color: var(--success); }
+.compare-val.warn { color: var(--warning); }
+
+/* Pros Cons & Target Lists */
+.pros-cons, .target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+.box { border-radius: 16px; padding: 1.5rem; }
+.pro-box, .target-yes { background: var(--success-light); border: 1px solid #A7F3D0; }
+.con-box, .target-no { background: var(--danger-light); border: 1px solid #FECACA; }
+.box-head { font-weight: 700; font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.pro-box .box-head, .target-yes .box-head { color: var(--success); }
+.con-box .box-head, .target-no .box-head { color: var(--danger); }
+.box-item { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; padding-left: 22px; position: relative; line-height: 1.6; word-break: keep-all; }
+.box-item:last-child { margin-bottom: 0; }
+.box-item::before { position: absolute; left: 0; top: 0; font-weight: bold; font-size: 15px; }
+.pro-box .box-item::before, .target-yes .box-item::before { content: "✓"; color: var(--success); }
+.con-box .box-item::before, .target-no .box-item::before { content: "✗"; color: var(--danger); }
+
+/* Verdict */
+.verdict { background: var(--primary-light); border: 1px solid #BFDBFE; border-radius: 16px; padding: 1.75rem; margin-top: 2rem; }
+.verdict-title { font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 17px; }
+.verdict-body { font-size: 15px; color: var(--text-muted); line-height: 1.7; word-break: keep-all; }
+
+/* Utilities */
+.divider { border: none; height: 1px; background: var(--border); margin: 3.5rem 0; }
+
+@media(max-width: 640px) {
+  .stats-row { grid-template-columns: 1fr; gap: 0.75rem; }
+  .compare-grid, .pros-cons, .target-grid { grid-template-columns: 1fr; }
+  .hero { padding: 2rem 1.5rem; }
+  .card { padding: 1.5rem; }
+}
+</style>
+
+<div class="blog">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">TIGER 반도체TOP10커버드콜액티브 ETF 초보자 가이드 블로그 포스트</h2>
+
+  <div class="hero">
+    <span class="hero-badge">2026년 신규 상장 ETF 분석</span>
+    <h1 class="hero-title">매달 월급처럼 배당받는 반도체 ETF?<br>TIGER 반도체TOP10 커버드콜 완전 분석</h1>
+    <p class="hero-sub">삼성전자·SK하이닉스의 변동성을 수익으로 바꾸는 ETF — 초보자도 이해하는 3분 가이드</p>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">월 분배율 (6월)</div>
+        <div class="stat-val">1.50%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">연환산 목표 수익률</div>
+        <div class="stat-val">15~18%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">상장일</div>
+        <div class="stat-val normal" style="font-size:18px">26. 04. 21</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+	  <p class="section-label" style='padding-top:15px;' >이 ETF 한 줄 요약</p>
+    <h2 class="section-title">삼성전자·SK하이닉스 주식을 보유하면서 매달 배당금을 챙기는 ETF입니다</h2>
+    <div class="card">
+      <p class="prose">주식 투자하면 보통 "주가가 오를 때 팔아서 이익을 낸다"고 생각하죠. 그런데 이 ETF는 조금 다릅니다. 주식을 보유하면서, 동시에 <strong style="color:var(--text-main);font-weight:700">"이 주식을 미래에 이 가격에 살 권리"를 팔아서</strong> 매달 현금(분배금)을 받는 구조입니다. 이것을 <strong style="color:var(--text-main);font-weight:700">커버드콜(Covered Call)</strong> 전략이라고 불러요.</p>
+      <div class="highlight-box">
+  <strong style="color:var(--text-main);font-weight:700">🍎 쉽게 비유하면? (과수원 농부의 고정가 납품 계약)</strong><br>
+  가을에 수확할 사과를 도매상에게 "한 상자에 무조건 5만 원에 넘기겠다"고 미리 약속하고, 그 대가로 두둑한 <strong style="color:var(--text-main);font-weight:700">계약금(옵션 프리미엄)</strong>을 먼저 챙기는 것과 같습니다.<br><br>
+  나중에 금사과가 되어 시세가 10만 원으로 폭등해도 5만 원에 넘겨야 하니 배가 아플 수 있습니다(수익 상한선 제한). 하지만 반대로 사과값이 2만 원으로 폭락하더라도, 이미 받아둔 계약금 덕분에 손해를 방어할 수 있는 구조입니다.
+</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">돈은 어떻게 버나요?</p>
+    <h2 class="section-title">수익 구조 3단계</h2>
+    <div class="card">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">반도체 주식을 산다</div>
+            <div class="step-desc">삼성전자·SK하이닉스 등 국내 반도체 TOP 10 종목을 보유합니다. 기초자산이 이 주식들이에요.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">주식을 살 권리(콜옵션)를 판다</div>
+            <div class="step-desc">이 주식들의 콜옵션을 팝니다. 이 때 받는 돈이 <strong style="font-weight:700;color:var(--text-main)">"옵션 프리미엄"</strong>인데, 이게 배당금의 재원이 됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">매달 분배금으로 지급한다</div>
+            <div class="step-desc">수취한 프리미엄을 투자자에게 매월 분배금으로 지급합니다. 2026년 5~6월 기준으로 월 1.2~1.5% 수준을 달성했습니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <strong style="font-weight:700;color:var(--text-main)">이 ETF만의 특별한 점:</strong> 최근 삼성전자·SK하이닉스 단일종목 레버리지 ETF가 상장되면서, 이 종목들의 일중 변동성이 커졌습니다. 옵션 가격은 변동성이 클수록 비싸지기 때문에, 이 ETF가 수취하는 프리미엄이 자연스럽게 높아지는 효과가 생겼습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">포트폴리오 구성</p>
+    <h2 class="section-title">어떤 종목이 얼마나 들어있나요?</h2>
+    <div class="card">
+      <div class="legend" id="pie-legend"></div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="pieChart"></canvas>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;">* 2026년 6월 기준. 선물은 SK스퀘어·SK하이닉스·삼성전기 선물 합산. 액티브 운용으로 비중이 변동될 수 있습니다.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">분배금 현황</p>
+    <h2 class="section-title">실제로 얼마나 받았나요?</h2>
+    <div class="card">
+      <div class="legend">
+        <span><span class="legend-sq" style="background:var(--primary)"></span>주당 분배금 (원)</span>
+        <span><span class="legend-sq" style="background:#F59E0B"></span>월 분배율 (%)</span>
+      </div>
+      <div class="chart-wrap" style="height:240px">
+        <canvas id="barChart"></canvas>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;">* 5월은 4/21 상장 후 첫 지급(영업일수 부족). 6월부터 정상 운용 궤도 진입.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-label">비교 분석</p>
+    <h2 class="section-title">일반 TIGER 반도체TOP10과 무엇이 다른가요?</h2>
+    <p class="prose">같은 미래에셋이 운용하는 두 ETF를 나란히 비교해봤습니다. 이름은 비슷하지만 목표 자체가 다른 상품입니다.</p>
+    
+    <div class="compare-grid">
+      <div class="compare-card featured">
+        <span class="compare-badge">이번 분석 ETF</span>
+        <div class="compare-name">TIGER 반도체TOP10<br>커버드콜액티브</div>
+        <div class="compare-row"><span class="compare-key">운용 방식</span><span class="compare-val">액티브</span></div>
+        <div class="compare-row"><span class="compare-key">월 배당</span><span class="compare-val good">있음 (1.2~1.5%)</span></div>
+        <div class="compare-row"><span class="compare-key">연 배당 목표</span><span class="compare-val good">15~18%</span></div>
+        <div class="compare-row"><span class="compare-key">주가 상승 참여</span><span class="compare-val warn">제한적</span></div>
+        <div class="compare-row"><span class="compare-key">하락 방어력</span><span class="compare-val good">상대적으로 높음</span></div>
+        <div class="compare-row"><span class="compare-key">총보수</span><span class="compare-val">연 0.45%</span></div>
+        <div class="compare-row"><span class="compare-key">이런 분께 적합</span><span class="compare-val" style="font-size:13px;">매달 현금 수입 필요</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-name">TIGER<br>반도체TOP10</div>
+        <div class="compare-row"><span class="compare-key">운용 방식</span><span class="compare-val">패시브</span></div>
+        <div class="compare-row"><span class="compare-key">월 배당</span><span class="compare-val warn">거의 없음</span></div>
+        <div class="compare-row"><span class="compare-key">연 배당 목표</span><span class="compare-val warn">~1% 미만</span></div>
+        <div class="compare-row"><span class="compare-key">주가 상승 참여</span><span class="compare-val good">100% 참여</span></div>
+        <div class="compare-row"><span class="compare-key">하락 방어력</span><span class="compare-val warn">없음</span></div>
+        <div class="compare-row"><span class="compare-key">총보수</span><span class="compare-val">연 0.09%</span></div>
+        <div class="compare-row"><span class="compare-key">이런 분께 적합</span><span class="compare-val" style="font-size:13px;">장기 성장을 노리는 분</span></div>
+      </div>
+    </div>
+	<br>
+	<p class="prose"> 특이사항으로는 커버드콜 ETF 인데도 불구하고, TIGER 반도체TOP10 보다 좋은 성과를 기록하고 있습니다. </p>
+    <div class="card" style="margin-top:1.5rem">
+	    <img src="/etf-research/images/0177R0_chart_1.jpg" style="width:100%" alt="수익률 비교차트">
+    </div>
+	<!--
+    <div class="card" style="margin-top:1.5rem">
+      <div class="legend">
+        <span><span class="legend-sq" style="background:var(--primary)"></span>커버드콜 (연 분배율 %)</span>
+        <span><span class="legend-sq" style="background:#9CA3AF"></span>일반 ETF (연 분배율 %)</span>
+      </div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="compareChart"></canvas>
+      </div>
+    </div>
+	-->
+	<p class="prose"> 액티브 ETF 특성상, 시장상황에 맞는 유연한 대응을 통해 패시브 ETF 대비 추가 수익을 거두고 있습니다. 최근 상장된 개별종목 레버리지의 영향으로 인해 개별종목 옵션의 프리미엄이 상승한것도 영향을 미치고 있을것이라 판단됩니다.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">장단점</p>
+    <h2 class="section-title">이 ETF의 빛과 그림자</h2>
+    <div class="pros-cons">
+      <div class="box pro-box">
+        <div class="box-head">장점</div>
+        <div class="box-item">연 15~18% 수준의 높은 배당</div>
+        <div class="box-item">매달 꼬박꼬박 현금 수입</div>
+        <div class="box-item">횡보장·완만한 하락장에서 방어력 발휘</div>
+        <div class="box-item">레버리지 ETF 상장으로 프리미엄 환경 유리</div>
+        <div class="box-item">AI·HBM 슈퍼사이클 테마 편승</div>
+      </div>
+      <div class="box con-box">
+        <div class="box-head">단점</div>
+        <div class="box-item">반도체 주가 급등 시 수익 제한</div>
+        <div class="box-item">운용역 역량에 따라 성과 편차 발생</div>
+        <div class="box-item">총보수 0.45% (일반 ETF 대비 높음)</div>
+        <div class="box-item">배당금 높아도 주가 하락 시 손실 가능</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">누구에게 맞는 ETF일까요?</p>
+    <h2 class="section-title">이런 분께 추천드립니다</h2>
+    <div class="target-grid">
+      <div class="box target-yes">
+        <div class="box-head">이런 분께 추천</div>
+        <div class="box-item">은퇴 후 매달 현금 흐름이 필요한 분</div>
+        <div class="box-item">반도체 섹터에 관심은 있지만 급등락이 무서운 분</div>
+        <div class="box-item">박스권 장세를 예상하는 분</div>
+        <div class="box-item">주식·펀드 포트폴리오에 현금 배당 ETF를 더하고 싶은 분</div>
+      </div>
+      <div class="box target-no">
+        <div class="box-head">이런 분께 비추천</div>
+        <div class="box-item">반도체 주가 폭등의 과실을 100% 가져가고 싶은 분</div>
+        <div class="box-item">10년 이상 적립식 장기 투자를 계획하는 분</div>
+        <div class="box-item">보수(운용 비용)를 최소화하고 싶은 분</div>
+        <div class="box-item">총자산 성장(Capital Gain)을 최우선으로 보는 분</div>
+      </div>
+    </div>
+    
+    <div class="verdict">
+      <div class="verdict-title">최종 정리</div>
+      <div class="verdict-body">이 ETF는 "반도체 주식으로 큰돈을 벌겠다"는 상품이 아닙니다. <strong style="color:var(--text-main);font-weight:700">"반도체 시장의 거친 변동성을 이용해 매달 두둑한 현금을 챙기겠다"</strong>는 상품입니다. 목적이 명확한 만큼, 내 투자 목표와 맞는지 먼저 확인하는 것이 중요합니다. 현금 흐름 중심의 인컴 투자자라면 <strong style="color:var(--primary);font-weight:700">적극 매수</strong>를, 성장형 투자자라면 일반 TIGER 반도체TOP10이 더 어울립니다.</div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--text-muted);text-align:center;padding-top:1.5rem;border-top:1px solid var(--border)">본 글은 투자 권유가 아닌 정보 제공 목적으로 작성되었습니다. 투자 판단은 본인 책임 하에 이루어져야 합니다.</p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// Chart 기본 폰트 설정
+Chart.defaults.font.family = "'Pretendard', sans-serif";
+Chart.defaults.color = '#4B5563';
+
+const pieData = [
+  {label:'삼성전자',val:20.99,color:'#2563EB'},
+  {label:'SK하이닉스',val:20.60,color:'#059669'},
+  {label:'TIGER 반도체TOP10 ETF',val:10.71,color:'#8B5CF6'},
+  {label:'SK스퀘어',val:9.71,color:'#D97706'},
+  {label:'삼성전기',val:8.24,color:'#EA580C'},
+  {label:'주식 선물 합계',val:12.94,color:'#6B7280'},
+  {label:'기타',val:16.81,color:'#DB2777'}
+];
+
+const legend = document.getElementById('pie-legend');
+pieData.forEach(d=>{
+  const s=document.createElement('span');
+  s.innerHTML=`<span class="legend-sq" style="background:${d.color}"></span>${d.label} ${d.val.toFixed(1)}%`;
+  legend.appendChild(s);
+});
+
+new Chart(document.getElementById('pieChart'),{
+  type:'doughnut',
+  data:{
+    labels:pieData.map(d=>d.label),
+    datasets:[{
+      data:pieData.map(d=>d.val),
+      backgroundColor:pieData.map(d=>d.color),
+      borderWidth: 2,
+      borderColor: '#FFFFFF',
+      hoverOffset: 4
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    cutout: '65%',
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor: 'rgba(17, 24, 39, 0.9)',
+        padding: 12,
+        titleFont: { size: 14 },
+        bodyFont: { size: 14 },
+        callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed.toFixed(1)}%`}
+      }
+    }
+  }
+});
+new Chart(document.getElementById('barChart'),{
+  type:'bar', // 차트의 기본 뼈대는 막대그래프로 설정
+  data:{
+    labels:['2026년 5월 (상장 첫 달)','2026년 6월'],
+    datasets:[
+      {
+        type: 'bar', // 주당 분배금은 막대그래프
+        label: '주당 분배금(원)',
+        data: [170, 215],
+        backgroundColor: '#2563EB',
+        yAxisID: 'y',
+        borderRadius: 6,
+        maxBarThickness: 60
+      },
+      {
+        type: 'line', // 월 분배율은 꺾은선그래프로 변경
+        label: '월 분배율(%)',
+        data: [1.27, 1.50],
+        borderColor: '#F59E0B',       // 선 색상
+        backgroundColor: '#FFFFFF',   // 동그라미 포인트 내부 색상 (흰색으로 깔끔하게)
+        borderWidth: 3,               // 선 굵기
+        pointBackgroundColor: '#F59E0B', // 포인트 테두리 색상
+        pointBorderWidth: 2,
+        pointRadius: 5,               // 동그라미 포인트 크기
+        tension: 0.2,                 // 선을 살짝 부드럽게 꺾이도록 설정 (0은 직선)
+        yAxisID: 'y1'
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{ backgroundColor: 'rgba(17, 24, 39, 0.9)', padding: 12 }
+    },
+    scales:{
+      y:{
+        type:'linear',
+        position:'left',
+        title:{display:true,text:'분배금(원)',font:{size:13, weight:'bold'}},
+        ticks:{autoSkip:false}, 
+        grid:{color:'#F3F4F6'}
+      },
+      y1:{
+        type:'linear',
+        position:'right',
+        title:{display:true,text:'분배율(%)',font:{size:13, weight:'bold'}},
+        grid:{drawOnChartArea:false}, // 오른쪽 축의 그리드 라인은 숨겨서 깔끔하게 유지
+        ticks:{callback:v=>v.toFixed(2)+'%'}
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('compareChart'),{
+  type:'bar',
+  data:{
+    labels:['연간 배당 수익률(하단 추정)','연간 배당 수익률(상단 추정)'],
+    datasets:[
+      {label:'커버드콜 ETF',data:[15,18],backgroundColor:'#2563EB',borderRadius:6, maxBarThickness: 80},
+      {label:'일반 ETF (TIGER 반도체TOP10)',data:[0.5,1],backgroundColor:'#9CA3AF',borderRadius:6, maxBarThickness: 80}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{ backgroundColor: 'rgba(17, 24, 39, 0.9)', padding: 12 }
+    },
+    scales:{
+      x:{ticks:{autoSkip:false,maxRotation:0,font:{size:13}}, grid:{display:false}},
+      y:{title:{display:true,text:'연간 분배율 (%)',font:{size:13, weight:'bold'}},ticks:{callback:v=>v+'%'}, grid:{color:'#F3F4F6'}}
+    }
+  }
+});
+</script>
+</BaseLayout>
